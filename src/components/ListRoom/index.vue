@@ -4,29 +4,21 @@
       <div class="room-item">
         <div class="test">
           <div class="line-level"></div>
-          <div class="item-box" @click.right="handleCLick">
-            <div class="content-item">
-              <p class="level">{{ item.level }}</p>
-              <p>{{ item.code }}</p>
-              <p>{{ item.name }}</p>
-            </div>
-            <!-- <PopupOptions
-              :popupStatus="popupStatus"
-              :offsetX="locationX"
-              :offsetY="locationY"
-            /> -->
+          <div class="item-box">
+            <ItemRoom :item="item" />
           </div>
         </div>
-        <ListRoom v-if="item.children.length != 0" :listRoom="item.children" />
+        <ListRoom v-if="item.children.length" :listRoom="item.children" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import PopupOptions from '../PopupOptions/index.vue';
+// import PopupOptions from "../PopupOptions/index.vue";
+import ItemRoom from "./ItemRoom/index.vue";
 export default {
-  name: 'ListRoom',
+  name: "ListRoom",
   props: {
     listRoom: {
       type: [Object, Array],
@@ -40,24 +32,28 @@ export default {
       locationX: 0,
       locationY: 0,
       popupStatus: false,
+      // heightOfTop:0
     };
   },
   methods: {
-    handleCLick(e) {
-      e.preventDefault();
-      this.locationX = e.offsetX;
-      this.locationY = e.offsetY;
-      this.popupStatus = true;
-
-      console.log(this.item, e.offsetX, e.offsetY, 'click');
-    },
+    // handleCLickRight(e) {
+    //   console.log("here");
+    //   e.preventDefault();
+    //   this.locationX = e.offsetX;
+    //   this.locationY = e.offsetY;
+    //   this.popupStatus = true;
+    // },
+    // handleClickLeft() {
+    //   this.popupStatus = false;
+    // },
   },
-  // components: { PopupOptions },
+  components: { ItemRoom },
 };
 </script>
 
 <style scoped>
 .render-room {
+  position: relative;
   margin-left: 16px;
   max-width: 500px;
   text-align: left;
@@ -69,6 +65,10 @@ export default {
   background: #dcdcdc;
   height: 2px;
 }
+
+/* .room-box-item{
+  position: relative;
+} */
 
 .room-box-item .room-item {
   padding-top: 8px;
@@ -94,15 +94,5 @@ export default {
 }
 .room-item .content-item span {
   color: #666666;
-}
-.content-item .level {
-  width: 24px;
-  height: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #48647f;
-  color: white;
-  border-radius: 4px;
 }
 </style>
