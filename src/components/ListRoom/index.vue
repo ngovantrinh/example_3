@@ -55,7 +55,6 @@ export default {
 .render-room {
   position: relative;
   margin-left: 16px;
-  max-width: 500px;
   text-align: left;
   border-left: 2px solid #dcdcdc;
 }

@@ -6,10 +6,10 @@
     :style="{ left: `${offsetX}px`, top: offsetY + 'px' }"
   >
     <ul class="list-options">
-      <li @click.left="addRoom" class="option-item">Thêm mới</li>
-      <li @click="removeRoom" class="option-item">Xoá phòng ban</li>
-      <li class="option-item">Nâng level</li>
-      <li class="option-item">Giảm level</li>
+      <li @click="addRoom" class="option-item">Thêm mới</li>
+      <li @click="removeRoom(listRoom)" class="option-item">Xoá phòng ban</li>
+      <li @click="onLevelUp(listRoom)" class="option-item">Nâng level</li>
+      <li @click="onLevelDown" class="option-item">Giảm level</li>
     </ul>
   </div>
 </template>
@@ -34,6 +34,12 @@ export default {
       type: Object,
     },
   },
+  data() {
+    return {
+      listRoom: eventBus.$data.listItem,
+      findData: null,
+    };
+  },
   methods: {
     addRoom() {
       eventBus.onChangeItem(this.item.id);
@@ -42,8 +48,29 @@ export default {
     removePopup(e) {
       this.$emit("remove", e);
     },
-    removeRoom() {
-      eventBus.$emit("removeRoom", this.item);
+    removeRoom(data) {
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].id === this.item.id) {
+          data.splice(i, 1);
+        } else {
+          this.removeRoom(data[i].children);
+        }
+      }
+    },
+    onLevelUp(data) {
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].id === this.item.id) {
+          // data.splice(i, 1);
+          // let a = data.splice(i, 1);
+          data = [...data, this.item];
+          console.log(this.item.name, data, "cho nay nay");
+        } else {
+          this.onLevelUp(data[i].children);
+        }
+      }
+    },
+    onLevelDown() {
+      console.log("LEVEL DOWN");
     },
   },
 };

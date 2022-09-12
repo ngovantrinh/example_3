@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import { data } from "../constants/constant";
 import ListRoom from "../components/ListRoom/index.vue";
 import { eventBus } from "../main";
 import FormAdd from "./FormAdd/index.vue";
@@ -18,20 +17,18 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      listRoom: data,
+      listRoom: eventBus.$data.listItem,
       formStatus: false,
     };
   },
   components: { ListRoom, FormAdd },
   created() {
+    // this.listRoom = eventBus.$data.listItem;
     eventBus.$on("showAddForm", () => {
       this.formStatus = true;
     });
     eventBus.$on("removeAddForm", () => {
       this.formStatus = false;
-    });
-    eventBus.$on("removeRoom", (item) => {
-      eventBus.removeRoom(this.listRoom, item.id);
     });
   },
   methods: {
@@ -51,6 +48,8 @@ export default {
 }
 .render-room-layout {
   border: 2px solid #dcdcdc;
-  width: 40%;
+  width: max-content;
+  min-width: 600px;
+  padding-bottom: 10px;
 }
 </style>
