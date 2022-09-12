@@ -13,6 +13,9 @@
             type="text"
             placeholder="Tên phòng ban..."
           />
+          <p class="warnning-text">
+            Tên phòng ban không được để trống, không chứa ký tự đặc biệt
+          </p>
         </label>
         <label class="input-line" for="">
           <h3 class="form-title">Mã phòng ban</h3>
@@ -124,6 +127,7 @@ export default {
 }
 .form-content .input-line {
   padding-bottom: 30px;
+  position: relative;
   width: 100%;
 }
 .form-content .input-line input {
@@ -142,7 +146,16 @@ export default {
   justify-content: end;
   cursor: pointer;
 }
-.warnning {
-  border-color: #ff7777;
+.form-content .input-line .warnning {
+  border-color: #ffc9c9;
+}
+.warnning-text {
+  position: absolute;
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 14px;
+  right: 25px;
+  bottom: 8px;
+  color: #fe3838;
 }
 </style>
