@@ -58,16 +58,17 @@ export default {
       }
     },
     onLevelUp(data) {
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].id === this.item.id) {
-          // data.splice(i, 1);
-          // let a = data.splice(i, 1);
-          data = [...data, this.item];
-          console.log(this.item.name, data, "cho nay nay");
-        } else {
-          this.onLevelUp(data[i].children);
-        }
-      }
+      console.log(data);
+      // for (let i = 0; i < data.length; i++) {
+      //   if (data[i].id === this.item.id) {
+      //     // data.splice(i, 1);
+      //     // let a = data.splice(i, 1);
+      //     data = [...data, this.item];
+      //     console.log(this.item.name, data, "cho nay nay");
+      //   } else {
+      //     this.onLevelUp(data[i].children);
+      //   }
+      // }
     },
     onLevelDown() {
       console.log("LEVEL DOWN");

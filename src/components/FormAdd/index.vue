@@ -13,7 +13,7 @@
             type="text"
             placeholder="Tên phòng ban..."
           />
-          <p class="warnning-text">
+          <p v-if="warnning" class="warnning-text">
             Tên phòng ban không được để trống, không chứa ký tự đặc biệt
           </p>
         </label>
@@ -75,17 +75,20 @@ export default {
             item[i].children = [...item[i].children, newItem];
             this.theNewItem.name = "";
             this.theNewItem.code = "";
-            this.warnning = false;
           } else {
             this.addNewRoom(item[i].children);
           }
         }
+        this.warnning = false;
       } else {
         this.warnning = true;
         console.log("warnning...");
       }
     },
     hideFormAdd() {
+      this.warnning = false;
+      this.theNewItem.name = "";
+      this.theNewItem.code = "";
       eventBus.$emit("removeAddForm");
     },
   },
@@ -152,9 +155,9 @@ export default {
 .warnning-text {
   position: absolute;
   font-weight: 400;
-  font-size: 8px;
+  font-size: 11px;
   line-height: 14px;
-  right: 25px;
+  right: 2px;
   bottom: 8px;
   color: #fe3838;
 }

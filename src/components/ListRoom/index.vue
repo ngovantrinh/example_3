@@ -1,7 +1,7 @@
 <template>
   <div class="render-room">
-    <div class="room-box-item" v-for="item in listRoom" :key="item.id">
-      <div class="room-item">
+    <div class="room-box-item">
+      <div class="room-item" v-for="item in listRoom" :key="item.id">
         <div class="test">
           <div class="line-level"></div>
           <div class="item-box">
@@ -15,7 +15,6 @@
 </template>
 
 <script>
-// import PopupOptions from "../PopupOptions/index.vue";
 import ItemRoom from "./ItemRoom/index.vue";
 export default {
   name: "ListRoom",
@@ -23,30 +22,15 @@ export default {
     listRoom: {
       type: [Object, Array],
     },
-    // item: {
-    //   type: [Object, Array],
-    // },
   },
   data() {
     return {
       locationX: 0,
       locationY: 0,
       popupStatus: false,
-      // heightOfTop:0
     };
   },
-  methods: {
-    // handleCLickRight(e) {
-    //   console.log("here");
-    //   e.preventDefault();
-    //   this.locationX = e.offsetX;
-    //   this.locationY = e.offsetY;
-    //   this.popupStatus = true;
-    // },
-    // handleClickLeft() {
-    //   this.popupStatus = false;
-    // },
-  },
+  methods: {},
   components: { ItemRoom },
 };
 </script>
@@ -64,10 +48,6 @@ export default {
   background: #dcdcdc;
   height: 2px;
 }
-
-/* .room-box-item{
-  position: relative;
-} */
 
 .room-box-item .room-item {
   padding-top: 8px;
