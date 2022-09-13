@@ -9,7 +9,7 @@
       <li @click="addRoom" class="option-item">Thêm mới</li>
       <li @click="removeRoom(listRoom)" class="option-item">Xoá phòng ban</li>
       <li @click="onLevelUp(listRoom)" class="option-item">Nâng level</li>
-      <li @click="onLevelDown" class="option-item">Giảm level</li>
+      <li @click="onLevelDown(listRoom)" class="option-item">Giảm level</li>
     </ul>
   </div>
 </template>
@@ -57,8 +57,8 @@ export default {
         }
       }
     },
-    onLevelUp(data) {
-      console.log(data);
+    onLevelUp() {
+      console.log("data");
       // for (let i = 0; i < data.length; i++) {
       //   if (data[i].id === this.item.id) {
       //     // data.splice(i, 1);
@@ -70,8 +70,35 @@ export default {
       //   }
       // }
     },
-    onLevelDown() {
-      console.log("LEVEL DOWN");
+    // levelUp(listItem) {
+    //   console.log(listItem.name);
+    //   return listItem;
+    //   // if (typeof listItem === "object" && listItem !== null) {
+    //   //   listItem = { ...listItem, level: listItem.level + 1 };
+    //   // } else {
+    //   //   for (let i = 0; i < listItem.length; i++) {
+    //   //     if (listItem[i].id === this.item.id) {
+    //   //       listItem[i] = { ...listItem[i], level: listItem[i].level };
+    //   //     } else {
+    //   //       this.levelUp(listItem[i].children);
+    //   //     }
+    //   //   }
+    //   // }
+    //   // this.levelUp();
+    // },
+    onLevelDown(data) {
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].id === this.item.id) {
+          data.splice(i, 1);
+          // this.levelUp(data, this.item);
+          data[0].children = [
+            ...data[0].children,
+            { ...this.item, level: this.item.level + 1 },
+          ];
+        } else {
+          this.onLevelDown(data[i].children);
+        }
+      }
     },
   },
 };

@@ -2,8 +2,6 @@
   <div @click.left="handleCLickleft" class="wrapper">
     <div class="render-room-layout">
       <ListRoom :listRoom="listRoom" />
-      <!-- <ListRoom v-if="item.children.length != 0" :item="item" /> -->
-      <!-- </ListRoom> -->
     </div>
     <FormAdd v-show="formStatus" :listRoom="listRoom" />
   </div>
@@ -23,7 +21,6 @@ export default {
   },
   components: { ListRoom, FormAdd },
   created() {
-    // this.listRoom = eventBus.$data.listItem;
     eventBus.$on("showAddForm", () => {
       this.formStatus = true;
     });

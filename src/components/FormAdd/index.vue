@@ -65,7 +65,6 @@ export default {
       if (this.theNewItem.name) {
         for (let i = 0; i < item.length; i++) {
           if (item[i].id === eventBus.$data.item) {
-            eventBus.$emit("removeAddForm");
             const newItem = {
               id: Math.random().toFixed(2) * 10,
               level: item[i].level + 1,
@@ -75,6 +74,7 @@ export default {
             item[i].children = [...item[i].children, newItem];
             this.theNewItem.name = "";
             this.theNewItem.code = "";
+            eventBus.$emit("removeAddForm");
           } else {
             this.addNewRoom(item[i].children);
           }
