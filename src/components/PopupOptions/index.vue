@@ -40,6 +40,11 @@ export default {
       findData: null,
     };
   },
+  computed: {
+    levelUpItem() {
+      return console.log("hehehe");
+    },
+  },
   methods: {
     addRoom() {
       eventBus.onChangeItem(this.item.id);
@@ -57,44 +62,25 @@ export default {
         }
       }
     },
-    onLevelUp() {
+    onLevelUp(data) {
       console.log("data");
-      // for (let i = 0; i < data.length; i++) {
-      //   if (data[i].id === this.item.id) {
-      //     // data.splice(i, 1);
-      //     // let a = data.splice(i, 1);
-      //     data = [...data, this.item];
-      //     console.log(this.item.name, data, "cho nay nay");
-      //   } else {
-      //     this.onLevelUp(data[i].children);
-      //   }
-      // }
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].id === this.item.id) {
+          if (data[i].level > 1) {
+            data[i].level = data[i].level - 1;
+          } else {
+            console.log("max level");
+          }
+        } else {
+          this.onLevelUp(data[i].children);
+        }
+      }
     },
-    // levelUp(listItem) {
-    //   console.log(listItem.name);
-    //   return listItem;
-    //   // if (typeof listItem === "object" && listItem !== null) {
-    //   //   listItem = { ...listItem, level: listItem.level + 1 };
-    //   // } else {
-    //   //   for (let i = 0; i < listItem.length; i++) {
-    //   //     if (listItem[i].id === this.item.id) {
-    //   //       listItem[i] = { ...listItem[i], level: listItem[i].level };
-    //   //     } else {
-    //   //       this.levelUp(listItem[i].children);
-    //   //     }
-    //   //   }
-    //   // }
-    //   // this.levelUp();
-    // },
     onLevelDown(data) {
       for (let i = 0; i < data.length; i++) {
         if (data[i].id === this.item.id) {
-          data.splice(i, 1);
-          // this.levelUp(data, this.item);
-          data[0].children = [
-            ...data[0].children,
-            { ...this.item, level: this.item.level + 1 },
-          ];
+          data[i].level = data[i].level + 1;
+          console.log(data[i].level);
         } else {
           this.onLevelDown(data[i].children);
         }

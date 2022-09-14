@@ -98,8 +98,8 @@ export default {
 <style scoped>
 .right-content {
   width: 48%;
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
 }
 .form-add {
   display: flex;
@@ -119,6 +119,7 @@ export default {
 .form-add .form-content {
   display: flex;
   flex-direction: column;
+  background: white;
   padding: 20px 30px;
   width: 100%;
 }

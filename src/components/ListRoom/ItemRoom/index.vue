@@ -41,7 +41,7 @@ export default {
       e.preventDefault();
       this.locationX = e.offsetX;
       this.locationY = e.offsetY;
-      this.popupStatus = !this.popupStatus;
+      this.popupStatus = true;
     },
     removeClickRight() {
       this.popupStatus = false;
