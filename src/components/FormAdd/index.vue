@@ -62,27 +62,33 @@ export default {
   },
   methods: {
     addNewRoom(item) {
+      // eslint-disable-next-line
+      const format = /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
       if (this.theNewItem.name) {
-        for (let i = 0; i < item.length; i++) {
-          if (item[i].id === eventBus.$data.item) {
-            const newItem = {
-              id: Math.random().toFixed(2) * 10,
-              level: item[i].level + 1,
-              ...this.theNewItem,
-              children: [],
-            };
-            item[i].children = [...item[i].children, newItem];
-            this.theNewItem.name = "";
-            this.theNewItem.code = "";
-            eventBus.$emit("removeAddForm");
-          } else {
-            this.addNewRoom(item[i].children);
+        if (this.theNewItem.name.match(format)) {
+          this.warnning = true;
+        } else {
+          for (let i = 0; i < item.length; i++) {
+            if (item[i].id === eventBus.$data.item) {
+              const newItem = {
+                id: Math.random().toFixed(2) * 10,
+                level: item[i].level + 1,
+                ...this.theNewItem,
+                children: [],
+              };
+              item[i].children = [...item[i].children, newItem];
+              this.theNewItem.name = "";
+              this.theNewItem.code = "";
+              eventBus.$emit("removeAddForm");
+            } else {
+              this.addNewRoom(item[i].children);
+            }
           }
+          this.warnning = false;
         }
-        this.warnning = false;
       } else {
         this.warnning = true;
-        console.log("warnning...");
+        console.log("warnning");
       }
     },
     hideFormAdd() {
