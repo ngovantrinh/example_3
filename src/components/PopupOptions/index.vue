@@ -8,7 +8,9 @@
     <ul class="list-options">
       <li @click="addRoom" class="option-item">Thêm mới</li>
       <li @click="removeRoom(listRoom)" class="option-item">Xoá phòng ban</li>
-      <li @click="onLevelUp(listRoom)" class="option-item">Nâng level</li>
+      <li @click="onLevelUp(listRoom, levelFor)" class="option-item">
+        Nâng level
+      </li>
       <li @click="onLevelDown(listRoom)" class="option-item">Giảm level</li>
     </ul>
   </div>
@@ -37,7 +39,8 @@ export default {
   data() {
     return {
       listRoom: eventBus.$data.listItem,
-      findData: null,
+      levelFor: 0,
+      childrenItem: null,
     };
   },
   computed: {
@@ -62,29 +65,36 @@ export default {
         }
       }
     },
-    onLevelUp(data) {
-      console.log("data");
+    onLevelUp(data, number) {
       for (let i = 0; i < data.length; i++) {
-        if (data[i].id === this.item.id) {
-          if (data[i].level > 1) {
-            data[i].level = data[i].level - 1;
-          } else {
-            console.log("max level");
+        if (number >= 1) {
+          console.log(number);
+          if (data[i].id === this.item.id) {
+            // console.log("for1");
+            this.childrenItem = data;
+            console.log(this.childrenItem);
+            this.childrenItem = [data[i], ...this.childrenItem];
+            // if (data[i].level > 1) {
+            //   data[i].level = data[i].level - 1;
+            // } else {
+            //   console.log("max level");
+            // }
           }
         } else {
-          this.onLevelUp(data[i].children);
+          this.onLevelUp(data[i].children, number + 1);
         }
       }
     },
     onLevelDown(data) {
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].id === this.item.id) {
-          data[i].level = data[i].level + 1;
-          console.log(data[i].level);
-        } else {
-          this.onLevelDown(data[i].children);
-        }
-      }
+      console.log("data", data);
+      // for (let i = 0; i < data.length; i++) {
+      //   if (data[i].id === this.item.id) {
+      //     data[i].level = data[i].level + 1;
+      //     console.log(data[i].level);
+      //   } else {
+      //     this.onLevelDown(data[i].children);
+      //   }
+      // }
     },
   },
 };
